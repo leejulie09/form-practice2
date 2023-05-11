@@ -8,26 +8,15 @@ function useInput(props: UseInputProps) {
   const { setValues, values, setError, error } = useContext(FormContext);
 
   const onChange = useCallback(
-    (value: string | number) => {
-      //[min(5), max(10)]
-      //func는 min or max
+    (value: string | number, index: number, checked: boolean) => {
+      //checkBoxField내부에서 정의해준 useState의 set함수를 (기존 작동방식이랑 다른것 같아) 다시 정의 해주려고 하니까 24번째줄의 setValues랑 겹침
+      //이런 경우에는 useContext안에 새로운 변수를 정의해주어야하는지? 기존 values, setValues를 재사용할 방법은 없는지?
 
-      // props.validates.forEach((validate) => {
-      //   const err: string = validate(value);
-      //   if (err) {
-      //     setError({
-      //       ...error,
-      //       [props.source]: err,
-      //     });
-      //   }
-      // });
+      // const updatedValues = [...values];
+      // updatedValues[index].checked = checked;
+      // setValues(updatedValues);
 
       const err: string[] = props.validates.map((validate) => validate(value));
-
-      // ["", ""] => ""
-      // ["hello", ""] =? hello
-      // ["", "hello"] => hello
-      // ["hello", "hello2"] => hello
 
       setError({
         ...error,

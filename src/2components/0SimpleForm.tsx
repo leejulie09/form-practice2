@@ -15,7 +15,13 @@ export const FormContext = createContext({
 });
 
 const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState({
+    // name: "",
+    // password: "abcd",
+    // city: "seoul",
+    // gender: "female",
+    // dogs: ["mongja", "boksun"],
+  });
   const [error, setError] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
 

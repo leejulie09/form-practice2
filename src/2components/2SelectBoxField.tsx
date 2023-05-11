@@ -1,32 +1,20 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
+import { OptionsProps } from "../3types/OptionsProps";
+import useInput from "../4hooks/useInput";
 
-interface City {
-  name: string;
-  value: string;
-}
-
-const cityOptions: City[] = [
-  { name: "서울", value: "seoul" },
-  { name: "부산", value: "busan" },
-  { name: "대구", value: "daegu" },
-  { name: "인천", value: "incheon" },
-];
-
-const SelectBoxField: React.FC = () => {
-  const [selectedCity, setSelectedCity] = useState<string>("");
-
-  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCity(event.target.value);
-  };
-
+const SelectBoxField: FunctionComponent<OptionsProps> = ({
+  label,
+  options,
+}) => {
+  const { value, onChange } = useInput({ label, options });
   return (
     <div style={{ display: "flex", gridGap: "8px" }}>
-      <div>거주지</div>
-      <select value={selectedCity} onChange={handleCityChange}>
-        <option value="">거주 중인 시 선택</option>
-        {cityOptions.map((city) => (
-          <option key={city.value} value={city.value}>
-            {city.name}
+      <div>{label}</div>
+      <select value={value} onChange={(e) => onChange(e.target.value)}>
+        <option value="">선택</option>
+        {options.map((el) => (
+          <option key={el.value} value={el.value}>
+            {el.name}
           </option>
         ))}
       </select>
