@@ -22,6 +22,11 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
     // gender: "female",
     // dogs: ["mongja", "boksun"],
   });
+
+  useEffect(() => {
+    console.log("values:", values);
+  }, [values]);
+
   const [error, setError] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
 

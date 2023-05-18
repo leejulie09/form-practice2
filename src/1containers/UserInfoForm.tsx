@@ -25,6 +25,7 @@ function UserInfoForm(): JSX.Element {
         />
         <SelectBoxField
           label="지역"
+          source="city"
           options={[
             { name: "서울", value: "seoul" },
             { name: "부산", value: "busan" },
@@ -34,6 +35,7 @@ function UserInfoForm(): JSX.Element {
         />
         <SelectBoxField
           label="성별"
+          source="gender"
           options={[
             { name: "남자", value: "male" },
             { name: "여자", value: "female" },
@@ -41,6 +43,7 @@ function UserInfoForm(): JSX.Element {
         />
         <CheckBoxField
           label="최애 강아지"
+          source="dogs"
           options={[
             {
               name: "몽자",

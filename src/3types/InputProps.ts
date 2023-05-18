@@ -5,7 +5,7 @@ export interface InputProps {
   label: string;
   placeholder?: string;
   type?: HTMLInputTypeAttribute;
-  validates: any[];
+  validates?: any[];
   error?: string;
   emailCheck?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }

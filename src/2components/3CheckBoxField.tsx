@@ -1,40 +1,62 @@
-import React, { useState } from "react";
-import { OptionsProps } from "../3types/OptionsProps";
+import React, { useEffect, useState } from "react";
+import { InputProps } from "../3types/InputProps";
 import useInput from "../4hooks/useInput";
 
-interface Animal {
-  name: string;
-  image: string;
-  value: string;
-  checked: boolean;
+interface CheckboxProps {
+  options: {
+    name: string;
+    value: string;
+    image: string;
+    checked: boolean;
+  }[];
 }
 
-const CheckBoxField: React.FC<OptionsProps> = ({ label, options }) => {
-  const { value, onChange } = useInput({ label, options });
+const CheckBoxField: React.FC<InputProps & CheckboxProps> = ({
+  label,
+  options,
+  source,
+}) => {
+  const { value, onChange } = useInput({ source, validates: [] });
 
-  const handleCheckboxChange = (index: number) => {
-    onChange(index, !options[index].checked);
+  useEffect(() => {
+    console.log("CBvalue:", value);
+  }, [value]);
+  //value의 형태 ["mongja", "boksun"]
+
+  const handleCheckbox = (e) => {
+    const updatedOptions = options.map((option) => {
+      if (option.value === e.target.id) {
+        e.target.checked === !option.checked;
+        return option.value;
+      }
+      return null;
+    });
+
+    onChange(updatedOptions);
   };
 
   return (
     <div style={{ display: "flex", gridGap: "8px", marginTop: "12px" }}>
       <div style={{ width: "100px" }}>{label}</div>
       <div>
-        {options.map((animal, index) => (
-          <label key={index}>
+        {options.map((option) => (
+          <div style={{ marginBottom: "24px" }}>
             <input
-              style={{ display: "flex", whiteSpace: "nowrap" }}
+              style={{ display: "flex" }}
               type="checkbox"
-              checked={animal.checked}
-              onChange={() => handleCheckboxChange(index)}
+              checked={option.checked}
+              id={option.value}
+              onChange={(e) => handleCheckbox(e)}
             />
-            {animal.name}
+            <label htmlFor={option.value} style={{ whiteSpace: "nowrap" }}>
+              {option.name}
+            </label>
             <img
-              src={animal.image}
-              alt={animal.name}
+              src={option.image}
+              alt={option.name}
               style={{ display: "block", width: "20%", height: "auto" }}
             />
-          </label>
+          </div>
         ))}
       </div>
     </div>
