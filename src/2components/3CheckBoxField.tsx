@@ -7,7 +7,6 @@ interface CheckboxProps {
     name: string;
     value: string;
     image: string;
-    checked: boolean;
   }[];
 }
 
@@ -18,35 +17,31 @@ const CheckBoxField: React.FC<InputProps & CheckboxProps> = ({
 }) => {
   const { value, onChange } = useInput({ source, validates: [] });
 
-  useEffect(() => {
-    console.log("CBvalue:", value);
-  }, [value]);
   //value의 형태 ["mongja", "boksun"]
+  const handleCheckbox = (optionValue: string) => {
+    let updatedValue: string[];
 
-  const handleCheckbox = (e) => {
-    const updatedOptions = options.map((option) => {
-      if (option.value === e.target.id) {
-        e.target.checked === !option.checked;
-        return option.value;
-      }
-      return null;
-    });
+    if (value?.includes(optionValue)) {
+      updatedValue = value.filter((item: string) => item !== optionValue);
+    } else {
+      updatedValue = value ? value.concat(optionValue) : [optionValue];
+    }
 
-    onChange(updatedOptions);
+    onChange(updatedValue);
   };
 
   return (
     <div style={{ display: "flex", gridGap: "8px", marginTop: "12px" }}>
       <div style={{ width: "100px" }}>{label}</div>
       <div>
-        {options.map((option) => (
+        {options.map((option, index) => (
           <div style={{ marginBottom: "24px" }}>
             <input
               style={{ display: "flex" }}
               type="checkbox"
-              checked={option.checked}
-              id={option.value}
-              onChange={(e) => handleCheckbox(e)}
+              checked={value?.includes(option.value) ?? false}
+              id={option.name}
+              onChange={(e) => handleCheckbox(option.value)}
             />
             <label htmlFor={option.value} style={{ whiteSpace: "nowrap" }}>
               {option.name}

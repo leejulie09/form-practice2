@@ -8,7 +8,7 @@ function useInput(props: UseInputProps) {
   const { setValues, values, setError, error } = useContext(FormContext);
 
   const onChange = useCallback(
-    (value: string | number | []) => {
+    (value: string | number | string[]) => {
       const err: string[] = props.validates.map((validate) => validate(value));
 
       setError({

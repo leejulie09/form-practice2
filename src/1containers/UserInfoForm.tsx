@@ -50,21 +50,18 @@ function UserInfoForm(): JSX.Element {
               value: "mongja",
               image:
                 "https://dispatch.cdnser.be/cms-content/uploads/2020/12/08/2adfbf30-faf7-46c0-86bd-c6aa079e8f24.jpg",
-              checked: false,
             },
             {
               name: "복순이",
               value: "boksun",
               image:
                 "https://i.playboard.app/p/cf6a88ca3dfbcf0e93e44aff9d2e5f86/default.jpg",
-              checked: false,
             },
             {
               name: "호두마루",
               value: "hodumaru",
               image:
                 "https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/90790363_107585440890200_1345258854610370560_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=e3f864&_nc_ohc=DaoJr2xg0LwAX_IAltN&_nc_ht=scontent-ssn1-1.xx&oh=00_AfAHEzn15PRJ-NOxLRhu3expdh4d8g9RWuKcJb6j7zjfPw&oe=647B41C7",
-              checked: false,
             },
           ]}
         />
