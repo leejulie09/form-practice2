@@ -3,12 +3,12 @@ import * as React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import SimpleForm from "../0SimpleForm";
 
-test("shows children", () => {
+test("renders children", () => {
   const testMessage = "Test Message";
   render(<SimpleForm>{testMessage}</SimpleForm>);
 });
 
-test("renders Button", () => {
+test("runs button", () => {
   const handleClick = jest.fn();
   const { getByText } = render(<button onClick={handleClick} />);
   fireEvent.click(screen.getByText("제출"));
