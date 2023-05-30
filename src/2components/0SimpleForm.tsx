@@ -15,25 +15,27 @@ export const FormContext = createContext({
 });
 
 const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
-  const [values, setValues] = useState({
-    // name: "",
-    // password: "abcd",
-    // city: "seoul",
-    // gender: "female",
-    // dogs: ["mongja", "boksun"],
-  });
-
-  useEffect(() => {
-    console.log("values:", values);
-  }, [values]);
+  const [values, setValues] = useState({});
+  // {name: "",
+  // password: "abcd",
+  // city: "seoul",
+  // gender: "female",
+  // dogs: ["mongja", "boksun"]}
 
   const [error, setError] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
+
+  // useEffect(() => {
+  //   console.log("values:", values);
+  // }, [values]);
 
   const value = useMemo(
     () => ({ setValues, values, setError, error }),
     [setValues, values, setError, error]
   );
+  // useEffect(() => {
+  //   console.log("value:", value);
+  // }, [value]);
 
   const onClick = (e: any) => {
     if (error) {
