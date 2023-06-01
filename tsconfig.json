@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "test/0SimpleForm.test.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
