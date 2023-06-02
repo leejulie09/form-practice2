@@ -12,20 +12,23 @@ describe("Simple Form test", () => {
   });
 
   it("ables submit button without error", () => {
+    window.alert = jest.fn();
     const testMessage = "Test Message";
     render(<SimpleForm>{testMessage}</SimpleForm>);
-    const paragraphElements = screen.queryAllByRole("paragraph");
-    expect(paragraphElements.length).toBeLessThan(1);
+    const button = screen.getByText("제출");
+    fireEvent.click(button);
 
-    expect(screen.getByText("제출")).not.toBeDisabled();
+    expect(window.alert).toHaveBeenCalled();
   });
 
   it("disables submit button with error", () => {
+    window.alert = jest.fn();
+
     const testMessage = "Test Message";
     render(<SimpleForm>{testMessage}</SimpleForm>);
-    const paragraphElements = screen.queryAllByRole("paragraph");
-    expect(paragraphElements.length).toBeGreaterThan(0);
+    const button = screen.getByText("제출");
+    fireEvent.click(button);
 
-    expect(screen.getByText("제출")).not.toBeDisabled();
+    expect(window.alert).not.toHaveBeenCalled();
   });
 });

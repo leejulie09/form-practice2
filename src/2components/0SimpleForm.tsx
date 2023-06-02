@@ -38,9 +38,13 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
   // }, [value]);
 
   const onClick = (e: any) => {
+    e.preventDefault();
+
     if (error) {
       return;
-    } else e.preventDefault();
+    } else {
+      alert(value);
+    }
   };
 
   useEffect(() => {
@@ -52,9 +56,9 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
 
   return (
     <FormContext.Provider value={value}>
-      <form>
+      <form onSubmit={onClick}>
         {children}
-        <button type={"submit"} onClick={onClick} disabled={isDisabled}>
+        <button type={"submit"} disabled={isDisabled}>
           제출
         </button>
       </form>
