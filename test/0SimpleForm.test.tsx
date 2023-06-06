@@ -25,7 +25,18 @@ describe("Simple Form test", () => {
     window.alert = jest.fn();
 
     const testMessage = "Test Message";
-    render(<SimpleForm>{testMessage}</SimpleForm>);
+    render(
+      <SimpleForm>
+        {testMessage}
+        <input
+          type="text"
+          name="name"
+          value="d"
+          //
+        />
+      </SimpleForm>
+    );
+    screen.debug();
     const button = screen.getByText("제출");
     fireEvent.click(button);
     expect(window.alert).not.toHaveBeenCalled();
