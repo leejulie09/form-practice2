@@ -11,7 +11,7 @@ describe("Simple Form test", () => {
     render(<SimpleForm>{testMessage}</SimpleForm>);
   });
 
-  it("ables submit button without error", () => {
+  it("enables submit button without error", () => {
     window.alert = jest.fn();
     const testMessage = "Test Message";
     render(<SimpleForm>{testMessage}</SimpleForm>);
@@ -27,6 +27,7 @@ describe("Simple Form test", () => {
     const testMessage = "Test Message";
     render(<SimpleForm>{testMessage}</SimpleForm>);
     const button = screen.getByText("제출");
-    expect(button).toHaveAttribute("aria-disabled", "true");
+    fireEvent.click(button);
+    expect(window.alert).not.toHaveBeenCalled();
   });
 });
