@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import * as React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import TextField from "../src/2components/1TextField";
 import { max, min } from "../src/5validations";
 
@@ -11,11 +11,17 @@ describe("Text Field", () => {
   });
 
   it("shows error when prop validates is passed", () => {
-    const { queryAllByRole } = render(
+    const { queryAllByRole, getByTestId } = render(
       <TextField source="" label="" validates={[min(1), max(3)]} />
     );
     //error를 만들기
+
+    const input = screen.getByTestId("input");
+    fireEvent.change(input, { target: { value: "aa" } });
+
     const paragraphElements = queryAllByRole("paragraph");
+    screen.debug();
+
     expect(paragraphElements.length).toBeGreaterThan(0);
   });
 });

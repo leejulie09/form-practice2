@@ -29,6 +29,10 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
   //   console.log("values:", values);
   // }, [values]);
 
+  useEffect(() => {
+    console.log("error:", error);
+  }, [values]);
+
   const value = useMemo(
     () => ({ setValues, values, setError, error }),
     [setValues, values, setError, error]
@@ -39,12 +43,7 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
 
   const onClick = (e: any) => {
     e.preventDefault();
-
-    if (error) {
-      return;
-    } else {
-      alert(value);
-    }
+    alert(value);
   };
 
   useEffect(() => {
