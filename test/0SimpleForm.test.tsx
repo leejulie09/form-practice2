@@ -2,6 +2,8 @@ import "@testing-library/jest-dom";
 import * as React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import SimpleForm from "../src/2components/0SimpleForm";
+import TextField from "../src/2components/1TextField";
+import {max, min} from "../src/5validations";
 
 //SimpleForm 에 에러가 있을 때 제출 버튼이 제대로 클릭되지 않는 것을 테스트
 //SimpleForm 에 에러가 없고 제출 버튼을 클릭했을 때 입력한 값들이 출력되는지 테스트
@@ -24,19 +26,19 @@ describe("Simple Form test", () => {
   it("disables submit button with error", () => {
     window.alert = jest.fn();
 
-    const testMessage = "Test Message";
     render(
       <SimpleForm>
-        {testMessage}
-        <input
-          type="text"
-          name="name"
-          value="d"
-          //
+        <TextField
+            source={"name"}
+            label={"이름"}
+            validates={[min(5), max(10)]}
         />
       </SimpleForm>
     );
-    screen.debug();
+
+    const input = screen.getByTestId("input");
+    fireEvent.change(input, { target: { value: "aa" } });
+
     const button = screen.getByText("제출");
     fireEvent.click(button);
     expect(window.alert).not.toHaveBeenCalled();

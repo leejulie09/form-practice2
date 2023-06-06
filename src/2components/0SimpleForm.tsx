@@ -23,29 +23,25 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
   // dogs: ["mongja", "boksun"]}
 
   const [error, setError] = useState({});
-  const [isDisabled, setIsDisabled] = useState(false);
 
   const value = useMemo(
     () => ({ setValues, values, setError, error }),
     [setValues, values, setError, error]
   );
 
+
   const onClick = (e: any) => {
     e.preventDefault();
 
-    if (Object.values(error).some((e) => !!e)) {
+    const hasError = Object.values(error).some((e) => !!e);
+    const hasEmptyInput = Object.values(values).some((v) => v === "");
+
+    if (hasError || hasEmptyInput) {
       return;
     } else {
       alert(JSON.stringify(values));
     }
   };
-
-  useEffect(() => {
-    const hasError = Object.values(error).some((e) => !!e);
-    const hasEmptyInput = Object.values(values).some((v) => v === "");
-
-    setIsDisabled(hasError || hasEmptyInput);
-  }, [values, error]);
 
   return (
     <FormContext.Provider value={value}>
@@ -53,8 +49,6 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
         {children}
         <button
           type={"submit"}
-          // disabled={isDisabled}
-          //
         >
           제출
         </button>
