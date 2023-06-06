@@ -25,21 +25,10 @@ const SimpleForm = ({ children }: PropsWithChildren<{}>) => {
   const [error, setError] = useState({});
   const [isDisabled, setIsDisabled] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("values:", values);
-  // }, [values]);
-
-  useEffect(() => {
-    console.log("error:", error);
-  }, [values]);
-
   const value = useMemo(
     () => ({ setValues, values, setError, error }),
     [setValues, values, setError, error]
   );
-  // useEffect(() => {
-  //   console.log("value:", value);
-  // }, [value]);
 
   const onClick = (e: any) => {
     e.preventDefault();
