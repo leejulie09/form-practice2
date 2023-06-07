@@ -21,6 +21,7 @@ const TextField: FunctionComponent<InputProps> = ({
       <div style={{ display: "flex", gridGap: "8px" }}>
         <label htmlFor={source}>{label}</label>
         <input
+          data-testid="input"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           name={source}

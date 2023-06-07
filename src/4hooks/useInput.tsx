@@ -9,15 +9,14 @@ function useInput(props: UseInputProps) {
 
   const onChange = useCallback(
     (value: string | number | string[]) => {
-      const err: string[] | undefined =
-        props.validates && props.validates.map((validate) => validate(value));
+      const err: string[] | undefined = props.validates?.map((validate) =>
+        validate(value)
+      );
 
-      if (err) {
-        setError({
-          ...error,
-          [props.source]: err.find((e) => e !== "") ?? "",
-        });
-      }
+      setError({
+        ...error,
+        [props.source]: err?.find((e) => e !== "") ?? "",
+      });
 
       setValues({
         ...values,
